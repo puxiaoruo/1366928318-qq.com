@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./js/index.js"></script>
+  <script src="./js/queue.js"></script>
+</head>
+<body>
+  <script>
+    /**
+     * 栈测试 
+    **/
+    let stack = new Stack()
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    stack.push(4)
+    stack.size()
+
+    // 十进制转二进制
+    /*
+      十进制101转二进制
+      101 / 2  ----->> 50 ---- 1
+       50 / 2  ----->> 25 ---- 0
+       25 / 2  ----->> 12 ---- 1
+       12 / 2  ----->>  6 ---- 0
+        6 / 2  ----->>  3 ---- 0
+        3 / 2  ----->>  1 ---- 1
+        1 / 2  ----->>  0 ---- 1
+      此时栈顶的数据为1(1 / 2  ----->>  0 ---- 1)
+        栈底的数据为1(101 / 2  ----->> 50 ---- 1)
+      二进制位1100101
+    */
+    function sysConvert (decimal) {
+      let stack = new Stack()
+      let remainder = ''
+      while (decimal > 0) {
+        // 取模 2
+        remainder = decimal % 2
+        // 将传过来的数值进行向下取整
+        decimal = Math.floor(decimal / 2)
+        stack.push(remainder)
+      }
+      // 拿到数据
+      let string = ''
+      while (!stack.isEmpty()) {
+        string += stack.pop()
+      }
+      return string
+    }
+    console.log(sysConvert(101)) // 输出1100101
+
+    /**
+     * 队列测试 
+    **/
+   let queue = new Queue()
+   queue.enqueue(1) 
+   console.log(queue, 'queue')
+
+  </script>
+</body>
+</html>
