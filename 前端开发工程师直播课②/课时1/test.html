@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+</body>
+<!-- <script src="./test1.js"></script> -->
+<script src="./test2.js"></script>
+<script>
+
+  var vm = new vue()
+  setTimeout(() => {
+    console.log(vm.$data)
+    vm.$data.a = 666
+  }, 2000)
+  let obj = { name: 'xie', age: 18 }
+  person('xie', 18)
+
+</script>
+</html>
