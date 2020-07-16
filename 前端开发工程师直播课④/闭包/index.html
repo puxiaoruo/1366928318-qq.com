@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" placeholder="请输入值">
+  <a href="#">切换12字体</a>
+  <script>
+    // scope 作用域
+    let pxr = '蒲小若' // 这个变量是在window上，所以在fn里可以被调用
+    function fn1 () {
+      console.log(pxr)
+    }
+    fn1()
+
+    // 作用域链， 一级一级往上面找 找到了就停止
+    let name = '小花'
+    function fn2() {
+      let name = '小明'
+      function fn3() {
+        let name = '小红'
+        console.log(name)
+      }
+      fn3()
+    }
+    fn2() // 小红
+
+    let num = 10
+    function addNum() {
+      let num = 0
+      num++
+      console.log(num)
+    }
+    addNum() // 1
+    console.log(num) // 10
+
+    function outer() {
+      let a1 = 0
+      let a2 = 1 // 没被应用，会被释放
+      return function inner() {
+        return a1 // 被引用，不会被释放，存于Closure中
+      }
+    }
+
+    function fn5() {
+      let getInnerData = outer()
+      console.dir(getInnerData)
+    }
+    fn5()
+
+    // function fn6() {
+    //   let name = '小绿'
+    //   console.log(name)
+    // }
+
+    // window.fn6() // 小绿 this就是当前的window
+    // this.fn6() // 小绿 this就是当前的window
+
+    function fn6() {
+      let name2 = '小白'
+      function displayName() {
+        console.log(name2)
+      }
+    }
+    fn6()
+
+    function fn7() {
+      let name3 = '小贱'
+      function displayName() {
+        console.log(name3)
+      }
+      return displayName
+    }
+
+    let myFn7 = fn7()
+    myFn7()
+
+    // 工厂函数，创建了将指定的值和参数相加的值
+    function makeAdder(x) {
+      return function (y) {
+        return x + y
+      }
+    }
+    // 共享了相同的函数定义
+    let add5 = makeAdder(5)
+    let add10 = makeAdder(10)
+    console.log(add5(2), add10(2)) // 7 12
+
+    // 闭包 => 面向对象编程，允许将某些对象的属性与一个或多个相关联 
+
+    // 事件防抖
+    function antiShake(fn, wait) {
+      let timeOut = null
+      return args => {
+        if (timeOut) {
+          clearTimeout(timeOut)
+          timeOut = null
+        } else {
+          timeOut = setTimeout(fn, wait)
+        }
+      } 
+    }
+
+    function demo2 () {
+      console.log('请求数据')
+    }
+
+    let telInput = document.querySelector('input')
+    telInput.addEventListener('input', antiShake(demo2, 1000))
+
+  </script>
+</body>
+</html>
