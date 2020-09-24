@@ -3,7 +3,7 @@
 
 // 时间绑定模块-》前端验证模块-》后端验证模块
 
-nput.onblur = function () {
+input.onblur = function () {
   var _value = input.value
   // 依次执行_arr里面的每一个方法，然后把上一个方法的结果给到下一个
   var _arr = [font, back]
